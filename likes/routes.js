@@ -6,26 +6,26 @@ function LikesRoutes(app) {
     const likes = await dao.findAllLikes();
     res.send(likes);
   };
-  const createUserLikesAlbum = async (req, res) => {
-    const { userId, albumId } = req.params;
-    const like = await dao.createUserLikesAlbum(userId, albumId);
+  const createUserLikesShow = async (req, res) => {
+    const { userId, showId } = req.params;
+    const like = await dao.createUserLikesShow(userId, showId);
     res.send(like);
   };
-  const findAlbumsUserLikes = async (req, res) => {
+  const findShowsUserLikes = async (req, res) => {
     const { userId } = req.params;
-    const likes = await dao.findAlbumsUserLikes(userId);
+    const likes = await dao.findShowsUserLikes(userId);
     res.send(likes);
   };
-  const findUsersWhoLikeAlbum = async (req, res) => {
-    const { albumId } = req.params;
-    const likes = await dao.findUsersWhoLikeAlbum(albumId);
+  const findUsersWhoLikeShow = async (req, res) => {
+    const { showId } = req.params;
+    const likes = await dao.findUsersWhoLikeShow(showId);
     res.send(likes);
   };
 
   app.get("/api/likes", findAllLikes);
-  app.post("/api/users/:userId/likes/:albumId", createUserLikesAlbum);
-  app.get("/api/users/:userId/likes", findAlbumsUserLikes);
-  app.get("/api/albums/:albumId/likes", findUsersWhoLikeAlbum);
+  app.post("/api/users/:userId/likes/:showId", createUserLikesShow);
+  app.get("/api/users/:userId/likes", findShowsUserLikes);
+  app.get("/api/shows/:showId/likes", findUsersWhoLikeShow);
 }
 
 export default LikesRoutes;

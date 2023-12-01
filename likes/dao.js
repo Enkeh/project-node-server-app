@@ -1,8 +1,8 @@
 import model from "./model.js";
 
 export const findAllLikes = () => model.find();
-export const createUserLikesAlbum = (userId, albumId) =>
-  model.create({ user: userId, albumId: albumId });
-export const findAlbumsUserLikes = (userId) => model.find({ user: userId });
-export const findUsersWhoLikeAlbum = (albumId) =>
-  model.find({ albumId: albumId });
+export const createUserLikesShow = (userId, showId) =>
+  model.create({ user: userId, showId: showId });
+export const findShowsUserLikes = (userId) => model.find({ user: userId });
+export const findUsersWhoLikeShow = (showId) =>
+  model.find({ showId: showId });
