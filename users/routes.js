@@ -72,13 +72,13 @@ function UserRoutes(app) {
   };
   const signUp = async (req, res) => {
     if (DEBUG) {console.log("signUp")};
-    const { username, password } = req.body;
+    const { username, password, role } = req.body;
     const userExists = await dao.findUserByUsername(username);
     if (userExists) {
       res.sendStatus(403);
       return;
     }
-    const user = await dao.createUser({ username, password });
+    const user = await dao.createUser({ username, password, role });
     const currentUser = user;
     req.session["currentUser"] = currentUser;
     res.json(user);

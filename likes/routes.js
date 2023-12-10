@@ -7,8 +7,13 @@ function LikesRoutes(app) {
     res.send(likes);
   };
   const createUserLikesShow = async (req, res) => {
+    const { userId, showId, showName } = req.params;
+    const like = await dao.createUserLikesShow(userId, showId, showName);
+    res.send(like);
+  };
+  const deleteUserLikesShow = async (req, res) => {
     const { userId, showId } = req.params;
-    const like = await dao.createUserLikesShow(userId, showId);
+    const like = await dao.deleteUserLikesShow(userId, showId);
     res.send(like);
   };
   const findShowsUserLikes = async (req, res) => {
@@ -21,11 +26,24 @@ function LikesRoutes(app) {
     const likes = await dao.findUsersWhoLikeShow(showId);
     res.send(likes);
   };
+  const findUsersWhoWatchedShow = async (req, res) => {
+    const { showId } = req.params;
+    const watched = await dao.findUsersWhoWatchedShow(showId);
+    res.send(watched);
+  };
+  const findIfUserLikesShow = async (req, res) => {
+    const { userId, showId } = req.params;
+    const likes = await dao.findIfUserLikesShow(userId, showId);
+    res.send(likes);
+  }
 
   app.get("/api/likes", findAllLikes);
-  app.post("/api/users/:userId/likes/:showId", createUserLikesShow);
-  app.get("/api/users/:userId/likes", findShowsUserLikes);
+  app.post("/api/users/:userId/likes/:showId/:showName", createUserLikesShow);
+  app.delete("/api/users/:userId/likes/:showId", deleteUserLikesShow);
+  app.get("/api/show/:userId/likes", findShowsUserLikes);
   app.get("/api/shows/:showId/likes", findUsersWhoLikeShow);
+  app.get("/api/shows/:showId/watched", findUsersWhoWatchedShow);
+  app.get("/api/shows/:userId/likes/:showId", findIfUserLikesShow);
 }
 
 export default LikesRoutes;
