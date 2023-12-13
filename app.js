@@ -14,13 +14,6 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0
 mongoose.connect(CONNECTION_STRING);
 
 const app = express();
-
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-  })
-);
 const sessionOptions = {
     secret: "any string",
     resave: false,
